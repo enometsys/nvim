@@ -14,6 +14,18 @@ M.base46 = {
 	-- },
 }
 
+-- Disable NvChad's default window navigation mappings
+M.mappings = {
+  disabled = {
+    n = {
+      ["<C-h>"] = "",
+      ["<C-l>"] = "",
+      ["<C-j>"] = "",
+      ["<C-k>"] = "",
+    }
+  }
+}
+
 -- M.nvdash = { load_on_startup = true }
 -- M.ui = {
 --       tabufline = {
