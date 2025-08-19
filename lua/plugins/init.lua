@@ -16,29 +16,32 @@ return {
   -- Treesitter Configuration
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "vim",
-        "lua",
-        "vimdoc",
-        "html",
-        "css",
-        "javascript",
-        "typescript",
-        "vue",
-        "tsx",
-        "json",
-        "markdown",
-        "markdown_inline",
-      },
-      highlight = {
-        enable = true,
-        use_languagetree = true,
-      },
-      indent = {
-        enable = true,
-      },
-    },
+    build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = {
+          "vim",
+          "lua",
+          "vimdoc",
+          "html",
+          "css",
+          "javascript",
+          "typescript",
+          "vue",
+          "tsx",
+          "json",
+          "markdown",
+          "markdown_inline",
+        },
+        highlight = {
+          enable = true,
+          use_languagetree = true,
+        },
+        indent = {
+          enable = true,
+        },
+      })
+    end,
   },
 
   -- Fugitive - Git integration
