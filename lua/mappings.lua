@@ -44,6 +44,11 @@ map("n", "zm", function() vim.cmd("normal! zm") end, { desc = "Close folds by on
 -- Toggle wrap
 map("n", "<leader>tw", function() vim.wo.wrap = not vim.wo.wrap end, { desc = "Toggle wrap" })
 
+-- Markdown Preview mappings
+map("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Toggle markdown preview" })
+map("n", "<leader>ms", "<cmd>MarkdownPreview<cr>", { desc = "Start markdown preview" })
+map("n", "<leader>mx", "<cmd>MarkdownPreviewStop<cr>", { desc = "Stop markdown preview" })
+
 -- Tmux navigation
 -- Override NvChad's default window navigation
 map("n", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", { desc = "Navigate left (tmux aware)" })

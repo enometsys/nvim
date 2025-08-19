@@ -118,4 +118,15 @@ return {
       pcall(unmap, "n", "<C-l>")
     end,
   },
+
+  -- Markdown Preview
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    lazy = false,
+    config = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+  },
 }
