@@ -35,11 +35,6 @@ map("n", "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)")
 map("n", "=p", "<Plug>(YankyPutAfterFilter)")
 map("n", "=P", "<Plug>(YankyPutBeforeFilter)")
 
--- Folding mappings
-map("n", "zR", function() require("nvim-treesitter.fold").open_all() end, { desc = "Open all folds" })
-map("n", "zM", function() require("nvim-treesitter.fold").close_all() end, { desc = "Close all folds" })
-map("n", "zr", function() vim.cmd("normal! zr") end, { desc = "Open folds by one level" })
-map("n", "zm", function() vim.cmd("normal! zm") end, { desc = "Close folds by one level" })
 
 -- Toggle wrap
 map("n", "<leader>tw", function() vim.wo.wrap = not vim.wo.wrap end, { desc = "Toggle wrap" })

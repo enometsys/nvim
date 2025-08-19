@@ -16,3 +16,15 @@ vim.api.nvim_create_autocmd("VimEnter", {
     vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>", { desc = "Navigate right (tmux aware)" })
   end,
 })
+
+-- Set up folding for each buffer with treesitter support
+vim.api.nvim_create_autocmd({"FileType"}, {
+  pattern = {"javascript", "typescript", "vue", "lua", "html", "css", "json", "markdown"},
+  callback = function()
+    vim.wo.foldmethod = "expr"
+    vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    vim.wo.foldenable = true
+    vim.wo.foldlevel = 99
+    vim.wo.foldlevelstart = 99
+  end,
+})
