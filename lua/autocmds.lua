@@ -19,11 +19,19 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 -- Set up folding for each buffer with treesitter support
 vim.api.nvim_create_autocmd({"FileType"}, {
-  pattern = {"javascript", "typescript", "vue", "lua", "html", "css", "json", "markdown"},
+  pattern = {"javascript", "typescript", "vue", "lua", "html", "css", "json", "markdown", "typespec"},
   callback = function()
     vim.wo.foldmethod = "expr"
     vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
     vim.wo.foldenable = true
     vim.wo.foldlevel = 99
+  end,
+})
+
+-- TypeSpec file type detection
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+  pattern = "*.tsp",
+  callback = function()
+    vim.bo.filetype = "typespec"
   end,
 })

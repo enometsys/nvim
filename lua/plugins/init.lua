@@ -18,6 +18,19 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
+      -- Custom parser for TypeSpec
+      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+      parser_config.typespec = {
+        install_info = {
+          url = "https://github.com/happenslol/tree-sitter-typespec",
+          files = {"src/parser.c"},  -- No scanner.c file in this grammar
+          branch = "main",
+          generate_requires_npm = false,
+          requires_generate_from_grammar = false,
+        },
+        filetype = "typespec",
+      }
+
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "vim",

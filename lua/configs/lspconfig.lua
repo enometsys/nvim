@@ -101,4 +101,35 @@ vim.lsp.config.eslint = {
       mode = "location"
     }
   }
-} 
+}
+
+-- TypeSpec Language Server configuration
+-- Note: You need to install @typespec/compiler globally:
+-- npm install -g @typespec/compiler
+vim.lsp.config.typespec = {
+  cmd = { "tsp-server", "--stdio" },
+  filetypes = { "typespec" },
+  root_markers = { "tspconfig.yaml", "package.json", ".git" },
+  init_options = {
+    preferences = {
+      includeInlayParameterNameHints = 'all',
+      includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+      includeInlayFunctionParameterTypeHints = true,
+      includeInlayVariableTypeHints = true,
+    }
+  },
+  settings = {
+    typespec = {
+      -- Add any TypeSpec-specific settings here if needed
+    }
+  }
+}
+
+-- Enable TypeSpec server if the command is available
+local function is_executable(cmd)
+  return vim.fn.executable(cmd) == 1
+end
+
+if is_executable("tsp-server") then
+  vim.lsp.enable({"typespec"})
+end 
