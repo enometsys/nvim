@@ -31,6 +31,6 @@ M.mappings = {
 --       tabufline = {
 --          lazyload = false
 --      }
---}
+-- }
 
 return M
