@@ -17,14 +17,23 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
--- Set up folding for each buffer with treesitter support
+-- Enable treesitter highlighting, folding, and indentation per filetype.
+-- On nvim-treesitter `main` branch, highlighting is opt-in per buffer.
 vim.api.nvim_create_autocmd({"FileType"}, {
-  pattern = {"javascript", "typescript", "vue", "lua", "html", "css", "json", "markdown", "typespec"},
+  pattern = {
+    "javascript", "typescript", "tsx", "vue",
+    "lua", "vim", "vimdoc",
+    "html", "css", "json",
+    "markdown", "markdown_inline",
+    "typespec",
+  },
   callback = function()
+    pcall(vim.treesitter.start)
     vim.wo.foldmethod = "expr"
     vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
     vim.wo.foldenable = true
     vim.wo.foldlevel = 99
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
 

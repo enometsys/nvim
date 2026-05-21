@@ -13,46 +13,33 @@ return {
     end,
   },
 
-  -- Treesitter Configuration
+  -- Treesitter Configuration (main branch — required for Neovim 0.12+)
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
     build = ":TSUpdate",
     config = function()
-      -- Custom parser for TypeSpec
-      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-      parser_config.typespec = {
-        install_info = {
-          url = "https://github.com/happenslol/tree-sitter-typespec",
-          files = {"src/parser.c"},  -- No scanner.c file in this grammar
-          branch = "main",
-          generate_requires_npm = false,
-          requires_generate_from_grammar = false,
-        },
-        filetype = "typespec",
-      }
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "TSUpdate",
+        callback = function()
+          require("nvim-treesitter.parsers").typespec = {
+            install_info = {
+              url = "https://github.com/happenslol/tree-sitter-typespec",
+              branch = "main",
+              generate = false,
+            },
+          }
+        end,
+      })
 
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          "vim",
-          "lua",
-          "vimdoc",
-          "html",
-          "css",
-          "javascript",
-          "typescript",
-          "vue",
-          "tsx",
-          "json",
-          "markdown",
-          "markdown_inline",
-        },
-        highlight = {
-          enable = true,
-          use_languagetree = true,
-        },
-        indent = {
-          enable = true,
-        },
+      require("nvim-treesitter").install({
+        "lua", "luadoc", "printf", "vim", "vimdoc",
+        "html", "css",
+        "javascript", "typescript", "tsx", "vue",
+        "json",
+        "markdown", "markdown_inline",
+        "typespec",
       })
     end,
   },
